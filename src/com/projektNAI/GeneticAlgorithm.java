@@ -93,7 +93,7 @@ public class GeneticAlgorithm implements IGeneticAlgorithm {
         return _iterationNumber > this.iterationNumber;
     }
 
-    public ArrayList<Chromosone> generateInicialPopulation(int amount, int length){
+    public ArrayList<Chromosone> generateInitialPopulation(int amount, int length){
         ArrayList<Chromosone> currentPop = new ArrayList<>();
 
         for(int i= 0; i < amount; i++){
