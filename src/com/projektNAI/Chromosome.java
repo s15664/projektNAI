@@ -1,10 +1,10 @@
 package com.projektNAI;
 
-public class Chromosone {
+public class Chromosome {
     private int genes[];
     private int fitnessScore;
 
-    public Chromosone(int[] genes) {
+    public Chromosome(int[] genes) {
         this.genes = genes;
     }
 
