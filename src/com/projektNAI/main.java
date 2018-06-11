@@ -10,7 +10,7 @@ public class main {
 
 		GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(0.5,0.01,100);
 
-		geneticAlgorithm.setPopulation(geneticAlgorithm.generateInicialPopulation(10,10));
+		geneticAlgorithm.setPopulation(geneticAlgorithm.generateInitialPopulation(10,10));
 
 
 		geneticAlgorithm.fitness(geneticAlgorithm.getPopulation());
