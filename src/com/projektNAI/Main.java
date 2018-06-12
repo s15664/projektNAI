@@ -7,17 +7,17 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(0.01,0.98,1000);
+		GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(0,0.98,10);
 
 		geneticAlgorithm.setPopulation(geneticAlgorithm.generateInitialPopulation(10,10));
 
 
 		geneticAlgorithm.fitness(geneticAlgorithm.getPopulation());
 
-		int j = 0;
+		int j = 0, fitnessSum = 0;
 		while(j < geneticAlgorithm.getIterationNumber()){
 
-			geneticAlgorithm.selection(geneticAlgorithm.getPopulation());
+			geneticAlgorithm.setPopulation(geneticAlgorithm.selection(geneticAlgorithm.getPopulation()));
 
 			Random r = new Random();
 			Double probCross = Math.random();
@@ -29,13 +29,14 @@ public class Main {
 				geneticAlgorithm.crossOver(first, second);
 			}
 
-			Double probMuta = Math.random();
+			Double probMuta = geneticAlgorithm.getMutationProb();
 
 			geneticAlgorithm.mutation(geneticAlgorithm.getPopulation(), probMuta);
 
-			geneticAlgorithm.selection(geneticAlgorithm.getPopulation());
+			geneticAlgorithm.fitness(geneticAlgorithm.getPopulation());
 
 			j++;
+			fitnessSum = 0;
 			
 			System.out.println("Iteracja nr:" + j);
 			for(Chromosome c : geneticAlgorithm.getPopulation()) {
@@ -43,8 +44,11 @@ public class Main {
 				for(int o : g) {
 					System.out.print(o);
 				}
-				System.out.println();
+				System.out.println("Fitness score:" + c.getFitnessScore());
+				fitnessSum += c.getFitnessScore();
 			}
+			System.out.println("Population fitness score:" + fitnessSum);
+			System.out.println();
 		}
 	}
 
