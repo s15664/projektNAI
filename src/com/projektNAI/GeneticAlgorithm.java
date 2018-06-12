@@ -1,6 +1,7 @@
 package com.projektNAI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class GeneticAlgorithm implements IGeneticAlgorithm {
@@ -32,21 +33,33 @@ public class GeneticAlgorithm implements IGeneticAlgorithm {
     @Override
     public void crossOver(Chromosome first, Chromosome second) {
         int length = population.get(0).getGenes().length;
+        
+        System.out.println("First chromosome:");
+        System.out.println(Arrays.toString(first.getGenes()));
+		System.out.println();
+
+        System.out.println("Second chromosome:");
+        System.out.println(Arrays.toString(second.getGenes()));
+		System.out.println();
+        
 
         Random r = new Random();
         int crossOverPoint = r.nextInt(length-1);
 
+        System.out.println("crossing point:" + crossOverPoint);
         for(int i = crossOverPoint; i < length; i++){
-            int geneFromFirst = first.getGenes()[i];
+        	int geneFromFirst = first.getGenes()[i];
             int geneFromSecond = second.getGenes()[i];
 
             first.getGenes()[i] = geneFromSecond;
             second.getGenes()[i] = geneFromFirst;
         }
+        
     }
 
     @Override
     public void mutation(ArrayList<Chromosome> _population, double _mutationProb) {
+    	
         for(int i= 0; i < _population.size(); i++){
             for(int j=0; j < _population.get(0).getGenes().length; j++){
                 Random r = new Random();
@@ -54,11 +67,13 @@ public class GeneticAlgorithm implements IGeneticAlgorithm {
 
                 int currentGeneValue = _population.get(i).getGenes()[j];
 
-                if(b > _mutationProb){
+                if(b < _mutationProb){
                     if(currentGeneValue == 1){
                         currentGeneValue = 0;
+                        System.out.println("mutating");
                     } else {
                         currentGeneValue = 1;
+                        System.out.println("not mutating");
                     }
                 }
 
@@ -68,23 +83,28 @@ public class GeneticAlgorithm implements IGeneticAlgorithm {
     }
 
     @Override
-    public void selection(ArrayList<Chromosome> _population) {
+    public ArrayList<Chromosome> selection(ArrayList<Chromosome> _population) {
+    	System.out.println("selecting");
         ArrayList<Chromosome> _oldPopulation = _population;
-        ArrayList<Chromosome> _newPopulation = new ArrayList<>();
+        ArrayList<Chromosome> _newPopulation = new ArrayList<Chromosome>();
 
-        Random r = new Random();
-        Random r2 = new Random();
-
-        Chromosome firstFighter = _oldPopulation.get(r.nextInt(_oldPopulation.size()));
-        Chromosome secondFighter = _oldPopulation.get(r2.nextInt(_oldPopulation.size()));
+        
 
         while(_newPopulation.size() < _oldPopulation.size()) {
+        	
+        	Random r = new Random();
+
+            Chromosome firstFighter = _oldPopulation.get(r.nextInt(_oldPopulation.size()));
+            Chromosome secondFighter = _oldPopulation.get(r.nextInt(_oldPopulation.size()));
+        	
             if (firstFighter.getFitnessScore() > secondFighter.getFitnessScore()) {
                 _newPopulation.add(firstFighter);
             } else {
                 _newPopulation.add(secondFighter);
             }
         }
+        
+        return _newPopulation;
     }
 
     @Override
