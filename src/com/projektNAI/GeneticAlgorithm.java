@@ -1,5 +1,7 @@
 package com.projektNAI;
 
+import com.projektNAI.TSP.ChromosomeTSP;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
