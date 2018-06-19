@@ -22,7 +22,7 @@ public class GARouletteSelection extends GeneticAlgorithm {
     	System.out.println("Selecting. Method: roulette");
         ArrayList<Chromosome> _oldPopulation = _population;
         ArrayList<Chromosome> _newPopulation = new ArrayList<Chromosome>();
-        int fitnessSum = 0;
+        double fitnessSum = 0;
         int rouletteSum = 0;
        
         for(Chromosome c : this.getPopulation()) {
@@ -35,7 +35,7 @@ public class GARouletteSelection extends GeneticAlgorithm {
         	
         	rouletteSum = 0;
         	Random r = new Random();
-            int b = r.nextInt(fitnessSum);
+            double b = r.nextDouble()*fitnessSum;
         	int i = 0;
         	
         	while(rouletteSum <= b && i < 9) {

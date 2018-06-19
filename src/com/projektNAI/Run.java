@@ -45,7 +45,10 @@ public class Run {
 			break;
 			
 			
+		case 7:
 			
+			geneticAlgorithm = new GARandomSelection(mutationProb,crossoverProb,populationSize);
+			break;	
 		}
 			
 
