@@ -1,7 +1,7 @@
 package com.projektNAI;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 
 public abstract class GeneticAlgorithm{
@@ -32,25 +32,25 @@ public abstract class GeneticAlgorithm{
     public void crossover(ArrayList<Chromosome> _population) {
     	
     	Random r = new Random();
-			
-			Chromosome first = _population.get(r.nextInt(_population.size()));
-			Chromosome second = _population.get(r.nextInt(_population.size()));
+    	
+    	int c1 = r.nextInt(_population.size());
+    	int c2;
+    	
+    	do {
+    		c2 = r.nextInt(_population.size());
+    	} while (c1 == c2);	
+    	
+		Chromosome first = _population.get(c1);
+		Chromosome second = _population.get(c2);
     	
         int length = population.get(0).getGenes().length;
         
-        System.out.println("First chromosome:");
-        System.out.println(Arrays.toString(first.getGenes()));
-		System.out.println();
+        System.out.println("Crossing chromosomes " + c1 + " and " + c2);
 
-        System.out.println("Second chromosome:");
-        System.out.println(Arrays.toString(second.getGenes()));
-		System.out.println();
-        
+        int crossoverPoint = r.nextInt(length-1);
 
-        int crossOverPoint = r.nextInt(length-1);
-
-        System.out.println("crossing point:" + crossOverPoint);
-        for(int i = crossOverPoint; i < length; i++){
+        System.out.println("Crossing point:" + crossoverPoint);
+        for(int i = crossoverPoint; i < length; i++){
         	int geneFromFirst = first.getGenes()[i];
             int geneFromSecond = second.getGenes()[i];
 
@@ -72,10 +72,10 @@ public abstract class GeneticAlgorithm{
                 if(b < _mutationProb){
                     if(currentGeneValue == 1){
                         currentGeneValue = 0;
-                        System.out.println("mutating gene " + j + " of chromosome " + i);
+                        System.out.println("Mutating gene " + j + " of chromosome " + i);
                     } else {
                         currentGeneValue = 1;
-                        System.out.println("mutating gene " + j + " of chromosome " + i);
+                        System.out.println("Mutating gene " + j + " of chromosome " + i);
                     }
                 }
 
@@ -119,6 +119,20 @@ public abstract class GeneticAlgorithm{
         return currentPop;
     }
     
+    public static Comparator<Chromosome> compareByFitness() {
+		
+   	 Comparator<Chromosome> comp = new Comparator<Chromosome>(){
+   	    
+   		 @Override
+   	     public int compare(Chromosome c1, Chromosome c2)
+   	     {
+   	         int first = c1.getFitnessScore();
+   	         int second = c2.getFitnessScore();
+   	         return second - first;
+   	     }        
+   	 	};
+   	 	return comp;
+   	}   
    
 
     public ArrayList<Chromosome> getPopulation() {

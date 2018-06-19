@@ -12,9 +12,9 @@ public class GATournamentSelection extends GeneticAlgorithm{
 	}
 
 	public ArrayList<Chromosome> selection(ArrayList<Chromosome> _population) {
-		
 		//TOURNAMENT SELECTION
-    	System.out.println("selecting tournament");
+		
+    	System.out.println("Selecting. Method: tournament");
         ArrayList<Chromosome> _oldPopulation = _population;
         ArrayList<Chromosome> _newPopulation = new ArrayList<Chromosome>();
 
