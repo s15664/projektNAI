@@ -10,9 +10,10 @@ public class Main {
 			double crossoverProbability = 0.98;
 			int populationSize = 10;
 			
-			long stochasticSum=0, tournamentSum=0, rouletteSum=0, truncationSum=0, linearSum=0, exponentialSum=0;
-		
-			for(int i = 1; i < 7; i++) {
+			long stochasticSum=0, tournamentSum=0, rouletteSum=0, truncationSum=0, linearSum=0, exponentialSum=0,
+					randomSum=0;
+			
+			for(int i = 1; i < 8; i++) {
 				
 				for(int j = 0; j < 100; j++) {
 				
@@ -37,6 +38,9 @@ public class Main {
 				
 					case 6: exponentialSum += run.run(mutationProbability, crossoverProbability, populationSize);
 					break;
+					
+					case 7: randomSum += run.run(mutationProbability, crossoverProbability, populationSize);
+					break;
 					}
 				}
 				
@@ -49,5 +53,6 @@ public class Main {
 			System.out.println("Truncation selection: " + truncationSum);
 			System.out.println("Linear selection: " + linearSum);
 			System.out.println("Exponential selection: " + exponentialSum);
+			System.out.println("Random selection: " + randomSum);
 	}
 }
