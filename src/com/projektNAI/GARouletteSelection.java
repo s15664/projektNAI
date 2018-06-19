@@ -19,8 +19,7 @@ public class GARouletteSelection extends GeneticAlgorithm {
 	public ArrayList<Chromosome> selection(ArrayList<Chromosome> _population) {
 		// ROULETTE SELECTION
 		
-		
-    	System.out.println("selecting roulette");
+    	System.out.println("Selecting. Method: roulette");
         ArrayList<Chromosome> _oldPopulation = _population;
         ArrayList<Chromosome> _newPopulation = new ArrayList<Chromosome>();
         int fitnessSum = 0;

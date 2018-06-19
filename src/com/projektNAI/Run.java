@@ -8,7 +8,7 @@ public class Run {
 		 number = i;
 	}
 
-	public void run() {
+	public int run(double mutationProb, double crossoverProb, int populationSize) {
 		
 		int j = 0, fitnessSum = 0;
 		GeneticAlgorithm geneticAlgorithm = null;
@@ -16,23 +16,40 @@ public class Run {
 		switch(number) {
 		case 1: 
 		
-			geneticAlgorithm = new GAStochasticSelection(0.005,0.98,10);
+			geneticAlgorithm = new GAStochasticSelection(mutationProb,crossoverProb,populationSize);
 			break;
 		
 		case 2:
 			
-			geneticAlgorithm = new GATournamentSelection(0.005,0.98,10);
+			geneticAlgorithm = new GATournamentSelection(mutationProb,crossoverProb,populationSize);
 			break;
 			
 		case 3:
 			
-			geneticAlgorithm = new GARouletteSelection(0.005,0.98,10);
+			geneticAlgorithm = new GARouletteSelection(mutationProb,crossoverProb,populationSize);
 			break;
+			
+		case 4:
+			
+			geneticAlgorithm = new GATruncationSelection(mutationProb,crossoverProb,populationSize);
+			break;
+			
+		case 5:
+	
+			geneticAlgorithm = new GALinearRankSelection(mutationProb,crossoverProb,populationSize);
+			break;
+			
+		case 6:
+			
+			geneticAlgorithm = new GAExponentialRankSelection(mutationProb,crossoverProb,populationSize);
+			break;
+			
+			
 			
 		}
 			
 
-		geneticAlgorithm.setPopulation(geneticAlgorithm.generateInitialPopulation(10,10));
+		geneticAlgorithm.setPopulation(geneticAlgorithm.generateInitialPopulation(populationSize,10));
 
 		geneticAlgorithm.fitness(geneticAlgorithm.getPopulation());
 		
@@ -71,8 +88,8 @@ public class Run {
 			System.out.println();
 			
 			
-	}
-
+		}
+		return fitnessSum;
 	}
 	
 }
