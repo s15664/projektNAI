@@ -30,7 +30,6 @@ public class GARouletteSelection extends GeneticAlgorithm {
 			fitnessSum += c.getFitnessScore();
 		}
         
-        
         while(_newPopulation.size() < _oldPopulation.size()) {
         	
         	rouletteSum = 0;
@@ -38,14 +37,14 @@ public class GARouletteSelection extends GeneticAlgorithm {
             double b = r.nextDouble()*fitnessSum;
         	int i = 0;
         	
-        	while(rouletteSum <= b && i < 9) {
+        	while(rouletteSum <= b && i < _oldPopulation.size()) {
         			
         			rouletteSum += this.getPopulation().get(i).getFitnessScore();
         			i++;
         		
         	}
         	
-        	_newPopulation.add(_oldPopulation.get(i));
+        	_newPopulation.add(_oldPopulation.get(i-1));
 
         }
         
